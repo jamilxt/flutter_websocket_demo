@@ -44,12 +44,23 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
+    // // If Server is using SockJs
+    // stompClient = StompClient(
+    //   config: StompConfig.SockJS(
+    //     url: socketUrl,
+    //     onConnect: onConnect,
+    //     onWebSocketError: (dynamic error) => print(error.toString()),
+    //   ),
+    // );
+
+    // If Server is not using SockJs
     stompClient = StompClient(
-        config: StompConfig(
-      url: socketUrl,
-      onConnect: onConnect,
-      onWebSocketError: (dynamic error) => print(error.toString()),
-    ));
+      config: StompConfig(
+        url: socketUrl,
+        onConnect: onConnect,
+        onWebSocketError: (dynamic error) => print(error.toString()),
+      ),
+    );
 
     stompClient.activate();
   }
