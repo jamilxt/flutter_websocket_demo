@@ -5,6 +5,9 @@ import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 
+import 'heatmap/heatmap_calendar.dart';
+import 'heatmap/time_utils.dart';
+
 // If Server is using SockJs
 // final socketUrl = 'http://10.0.2.2:8080/ws-message';
 // If Server is not using SockJs
@@ -90,6 +93,42 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$message',
               style: Theme.of(context).textTheme.bodyText1,
+            ),
+            HeatMapCalendar(
+              input: {
+                TimeUtils.removeTime(
+                    DateTime.now().subtract(Duration(days: 3))): 5,
+                TimeUtils.removeTime(
+                    DateTime.now().subtract(Duration(days: 2))): 35,
+                TimeUtils.removeTime(
+                    DateTime.now().subtract(Duration(days: 1))): 14,
+                TimeUtils.removeTime(DateTime.now()): 5,
+              },
+              colorThresholds: {
+                1: Colors.green.shade100,
+                10: Colors.green.shade300,
+                30: Colors.green.shade500
+              },
+              weekDaysLabels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+              monthsLabels: [
+                "",
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+              squareSize: 16.0,
+              textOpacity: 0.3,
+              labelTextColor: Colors.blueGrey,
+              dayTextColor: Colors.blue.shade500,
             )
           ],
         ),
